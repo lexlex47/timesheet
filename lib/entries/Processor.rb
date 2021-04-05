@@ -8,6 +8,8 @@ class Processor
 
   include Singleton
 
+  attr_accessor :caculator
+
   def initialize()
     @caculator = Caculator.new
   end

@@ -47,7 +47,6 @@ class Entry < ApplicationRecord
   def fetch_time(time)
     hour = time.hour
     minutes = time.min
-    puts Time.find_zone("UTC").parse("#{hour}:#{minutes}")
     Time.find_zone("UTC").parse("#{hour}:#{minutes}")
   end
 

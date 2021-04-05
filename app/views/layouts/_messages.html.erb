@@ -1,0 +1,23 @@
+<% if notice %>
+  <p class="alert alert-success"><%= notice %></p>
+<% end %>
+<% if alert %>
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1">
+        <% flash.each do |name, msg| %>
+            <div class="alert alert-danger">
+                <%= msg %>
+            </div>
+        <% end %>  
+    </div>
+  </div>
+<% end %>
+
+<style type="text/css">
+  .alert-success{
+    color: green;
+  }
+  .alert-danger{
+    color: red;
+  }
+</style>

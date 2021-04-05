@@ -1,8 +1,12 @@
 FactoryBot.define do
   factory :entry do
-    date { "2021-04-05" }
-    amount { "9.99" }
-    start_time { "2021-04-05 18:32:37" }
-    finish_time { "2021-04-05 18:32:37" }
+
+    factory :valid_entry do
+      date { "2019-04-15" }
+      start_time { "10:00" }
+      finish_time { "17:00" }      
+    end
+
   end
+
 end

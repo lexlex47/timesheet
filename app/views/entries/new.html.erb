@@ -1,0 +1,20 @@
+<h1>Create Timesheet Entry</h1>
+
+<%= form_for @entry = Entry.new do |f| %>
+  <%= f.label 'Date' %>
+    <div>
+      <%= f.date_select :date,
+                        start_year: Date.current().year - 10, 
+                        end_year: Date.current().year 
+      %>
+    </div>
+  <%= f.label 'Start Time' %>
+    <div>
+      <%= f.time_select :start_time %>
+    </div>
+  <%= f.label 'Finish Time' %> 
+    <div>
+      <%= f.time_select :finish_time %>
+    </div>
+  <%= f.submit "Create"%>
+<% end %>

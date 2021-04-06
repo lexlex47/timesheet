@@ -13,15 +13,16 @@ RSpec.describe Weekday_Handler do
 
   describe "methods" do
     before do 
-      @date = Date.new(2019,04,16)
-      @start_time = Time.find_zone("UTC").parse("12:00")
-      @finish_time = Time.find_zone("UTC").parse("20:15")
-      @caculator = Caculator.new
-      @weekday_handler = Weekday_Handler.new(@date, @start_time, @finish_time, @caculator)
+      entry = FactoryBot.build :entry
+      caculator = Caculator.new
+      @weekday_handler = Weekday_Handler.new(entry.date,
+                                             entry.start_time,
+                                             entry.finish_time, 
+                                             caculator)
     end
     context "#weekday_create" do
-      it "should return a float" do
-        expect(@weekday_handler.weekday_create).to be_an_instance_of(Float)
+      it "should able return a numeric" do
+        expect(@weekday_handler.weekday_create).to be_an_instance_of(Integer)
       end
     end
     context "#weekday_name" do

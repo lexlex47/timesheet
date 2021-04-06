@@ -26,7 +26,7 @@ RSpec.describe Processor do
       expect(processor).to respond_to(:result_amount).with(3).argument
     end
 
-    it "should return float value" do
+    it "should able to return a float value" do
       date = Date.new(2019,04,16)
       start_time = Time.find_zone("UTC").parse("12:00")
       finish_time = Time.find_zone("UTC").parse("20:15")

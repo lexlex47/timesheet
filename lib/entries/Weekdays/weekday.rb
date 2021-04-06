@@ -20,6 +20,7 @@ module Weekdays
     end
 
     def set_range
+      []
     end
 
     def process

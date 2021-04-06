@@ -7,6 +7,7 @@ class Entry < ApplicationRecord
   validates :date, :start_time, :finish_time, presence: true
   validate :is_data_valid?
   before_create :get_amount
+  scope :recent, -> { order(date: :desc)}
 
   def is_data_valid?
     !is_future_date? && !is_time_in_wrong_order? && !is_time_overlap?

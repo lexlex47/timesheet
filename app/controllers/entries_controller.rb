@@ -1,30 +1,31 @@
 class EntriesController < ApplicationController
 
   def index
-    @entries = Entry.order('date DESC')
+    entries = Entry.recent.all
   end
 
   def new
-    @entry = Entry.new 
+    entry = Entry.new 
   end
 
   def create
-    @entry = Entry.new(entry_params)
-    if @entry.save
+    entry = Entry.new(entry_params)
+    if entry.save
       flash[:notice] = "Timesheet Entry create successful"
       redirect_to root_path
     else
-      flash[:alert] = @entry.errors.full_messages
+      flash[:alert] = entry.errors.full_messages
       redirect_to new_entry_path
     end
   end
 
   def update
-    @entry = Entry.find(params[:id])
-    if @entry.save
+    entry = Entry.find(params[:id])
+    entry.update!(entry_params)
+    if entry.save
       flash[:notice] = "Timesheet Enrty update successful"
     else
-      flash[:alert] = @entry.errors.full_messages
+      flash[:alert] = entry.errors.full_messages
     end
     redirect_to root_path
   end

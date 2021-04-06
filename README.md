@@ -1,4 +1,4 @@
-# Weploy
+# Weploy Timesheet
 
 [![Build Status](https://travis-ci.org/lexlex47/timesheet.svg?branch=main)](https://travis-ci.org/lexlex47/timesheet)
 [![codecov](https://codecov.io/gh/lexlex47/timesheet/branch/main/graph/badge.svg?token=3idyfQden5)](https://codecov.io/gh/lexlex47/timesheet)
@@ -65,12 +65,12 @@ Ruby
 
 - System
 
-1.  a controller for Entry
+1.  a controller for Entries
 2.  a model for Entry
 3.  Entry have: date, start time, finish time, total amount
-4.  some customize lib classes for caculate
+4.  some customize lib classes
 5.  two simple frontend pages: index and new
-6.  validation for input in backend
+6.  validation for input data in backend
 
 - Controller and Model
 
@@ -110,7 +110,7 @@ a instance for caculate value
 }
 ```
 Range:
-a instance store single time range
+a instance store single time range and rate
 ```
 {
   range_start_time
@@ -119,7 +119,7 @@ a instance store single time range
 }
 ```
 Weekday_Handler:
-receive input date and create belonged Weekday instance
+receive input date and create belonged Weekday objects
 ```
 {
   weekday_create
@@ -136,3 +136,71 @@ Set the Processor class to be a singleton. Because of Processor instance will an
 
 - Command Pattern
 
+The Weekdays moudle is using the command pattern. Using command objects makes it easier to construct general components that need to delegate, sequence or execute method calls at a time of their choosing without the need to know the class of the method or the method parameters.
+
+***
+
+### Model Validations
+
+1.  Date of entry, can not be in the future.
+2.  Finish time can not before start time.
+3.  Entries time can not overlapping.
+4.  Index page, dispaly Entries base on Date decrease order.
+
+***
+
+### Total Amount Caculation
+
+#### Weekdays Moudle
+
+Here I implement 7 weekdays subclass inherit from base class: Weekdays::Weekday.
+Each Weekdays::Weekday can be seen as an Event of current weekday. So it has:
+```
+{
+  event_start_time
+  event_finish_time
+}
+```
+Besides this, Weekdays::Weekday also have an array of Range objects. This Range class is an object store one time period, so it has:
+```
+{
+  range_start_time
+  range_end_time
+  current_time_range_rate
+}
+```
+The advantage in this design way:
+
+1.  loose coupling between time period and different weekday
+2.  easy extend
+3.  can create time period as much as you want, not limited in one inside and one outside
+4.  can create many Event of weekday in same day
+5.  time periods always can cover from 00:00 to 24:00
+
+#### Time period implementation
+
+- First, check the start_time is covered by the current time period(the first time period always start from 00:00) or not:
+```
+(range.range_start..range.range_end).cover?(@start_time)
+```
+if start_time is not covered, it means finish_time is not in this period as well, just return 0;
+
+- Second, if start_time is covered then check the finish_time is covered or not:
+```
+(range.range_start..range.range_end).cover?(@finish_time)
+```
+if finish_time is covered, it means current event is finished inside current time period, do:
+```
+return @caculator.amount_caculate(@start_time, @finish_time, range.rate)
+```
+and return the amount of current time range;
+
+- Third, if finish_time is not covered, it means current time range will need fully caculate
+```
+@caculator.amount_caculate(@start_time, range.range_end, range.rate)
+```
+also, the start_time will be assign to curren time range's end_time, because the caculation is not complete yet, there still other time period left:
+```
+@start_time = range.range_end
+```
+and return the current amount.

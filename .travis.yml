@@ -1,6 +1,9 @@
 env:
   global:
     - CC_TEST_REPORTER_ID = d125854f7706dd0c83d561b193b5d460d221e0359007d4ec4bb3960330a7e76d
+before_install:
+  - gem update --system 2.5.7
+  - gem --version
 language: ruby
 rvm:
 - 2.0.0
@@ -12,8 +15,8 @@ before_script:
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 script:
-  - gem install bundler
-  - bundle update
+  # - gem install bundler
+  # - bundle update
   - bundle install
   - bundle exec rake db:create
   - bundle exec rake db:migrate

@@ -173,8 +173,8 @@ The advantage in this design way:
 
 1.  loose coupling between time period and different weekday
 2.  easy extend
-3.  can create time period as much as you want, not limited in one inside and one outside
-4.  can create many Event of weekday in same day
+3.  can create a time period as much as you want, not limited to one inside and one outside
+4.  can create many Event on a weekday on the same day
 5.  time periods always can cover from 00:00 to 24:00
 6.  avoid the brute force
 
@@ -196,11 +196,11 @@ return @caculator.amount_caculate(@start_time, @finish_time, range.rate)
 ```
 and return the amount of current time range;
 
-- Third, if finish_time is not covered, it means current time range will need fully caculate
+- Third, if finish_time is not covered, it means the current time range will need to fully calculate:
 ```
 amount = @caculator.amount_caculate(@start_time, range.range_end, range.rate)
 ```
-also, the start_time will be assign to curren time range's end_time, because the caculation is not complete yet, there still other time period left:
+also, the start_time will be assigned to the current time range's end_time, because the calculation is not complete yet, there still other time period left:
 ```
 @start_time = range.range_end
 return amount
@@ -220,9 +220,9 @@ total
 
 ### Something can be refactoring...
 
-- I more focus on the Backend side development, therefore frontend page only use simple html and css to render. After can add bootstrap lib, or use ReactJs to styling page.
+- I more focus on the Backend side development, therefore the frontend page only use simple html and css to render. After can add bootstrap lib, or use ReactJs to the styling page.
 
-- Can use some service objects like: interactor-rails to refactoring code and thin controller.
+- Can use some service objects like interactor-rails to refactoring code and thin controller.
 
 - Add more validation and exceptions.
 

@@ -39,7 +39,9 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+.ruby-version
 
 /coverage
 .lock
 Gemfile.lock
+/.ruby-version

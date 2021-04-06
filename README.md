@@ -56,3 +56,83 @@ To run rspec test execute:
 ***
 
 ## Design
+
+### Architecture
+
+- Language
+
+Ruby
+
+- System
+
+1.  a controller for Entry
+2.  a model for Entry
+3.  Entry have: date, start time, finish time, total amount
+4.  some customize lib classes for caculate
+5.  two simple frontend pages: index and new
+6.  validation for input in backend
+
+- Controller and Model
+
+Entries controller
+```
+{
+  index
+  create
+  new
+  update 
+}
+```
+Entry model
+```
+{
+  date: date
+  start_time: time
+  finish_time: time
+  amount: decimal
+}
+```
+
+- customize libs
+
+Processor:
+to receive input and return total caculated amount to Entry model
+```
+{
+  result_amount
+}
+```
+Caculator:
+a instance for caculate value
+```
+{
+  amount_caculate
+}
+```
+Range:
+a instance store single time range
+```
+{
+  range_start_time
+  range_end_time
+  rate
+}
+```
+Weekday_Handler:
+receive input date and create belonged Weekday instance
+```
+{
+  weekday_create
+}
+```
+
+***
+
+### Patterns
+
+- Singleton
+
+Set the Processor class to be a singleton. Because of Processor instance will and always be only one in the system. It will not be created except from main application class.
+
+- Command Pattern
+

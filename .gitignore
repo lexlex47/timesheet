@@ -42,6 +42,6 @@ yarn-debug.log*
 .ruby-version
 
 /coverage
-# .lock
-# Gemfile.lock
+.lock
+Gemfile.lock
 /.ruby-version

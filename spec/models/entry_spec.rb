@@ -34,4 +34,11 @@ RSpec.describe Entry, type: :model do
     end
   end
 
+  describe "#get_amount" do
+    let(:entry) {FactoryBot.build :entry}
+    it "should return a numeric" do
+      expect(entry.get_amount).to be_an_instance_of(Integer)
+    end
+  end
+
 end

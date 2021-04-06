@@ -176,6 +176,7 @@ The advantage in this design way:
 3.  can create time period as much as you want, not limited in one inside and one outside
 4.  can create many Event of weekday in same day
 5.  time periods always can cover from 00:00 to 24:00
+6.  avoid the brute force
 
 #### Time period implementation
 
@@ -197,10 +198,32 @@ and return the amount of current time range;
 
 - Third, if finish_time is not covered, it means current time range will need fully caculate
 ```
-@caculator.amount_caculate(@start_time, range.range_end, range.rate)
+amount = @caculator.amount_caculate(@start_time, range.range_end, range.rate)
 ```
 also, the start_time will be assign to curren time range's end_time, because the caculation is not complete yet, there still other time period left:
 ```
 @start_time = range.range_end
+return amount
 ```
-and return the current amount.
+and return the current amount, and repeat First step.
+
+- Finally, in `process` method, add all amount together and return total_amount to Entry model.
+```
+total = 0
+@time_ranges.each do |range|
+  total += process_range(range)
+end
+total
+```
+
+***
+
+### Something can be refactoring...
+
+- I more focus on the Backend side development, therefore frontend page only use simple html and css to render. After can add bootstrap lib, or use ReactJs to styling page.
+
+- Can use some service objects like: interactor-rails to refactoring code and thin controller.
+
+- Add more validation and exceptions.
+
+- Use REST API or GraphQL to pass data.

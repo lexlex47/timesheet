@@ -1,6 +1,7 @@
 env:
   global:
     - CC_TEST_REPORTER_ID = d125854f7706dd0c83d561b193b5d460d221e0359007d4ec4bb3960330a7e76d
+    - CODECOV_TOKEN = c1243c93-796a-4dfe-8def-146f1ee38de1
 language: ruby
 rvm:
 # - 2.0.0

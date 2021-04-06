@@ -1,18 +1,22 @@
-<h1>Timesheets Entries</h1>
-  
-<table>
-    <tr>
-      <th>Date</th>
-      <th>Time</th>
-      <th>Amount</th>
-    </tr>
-    <% @entries.each do |entry| %>
-      <tr>
-        <td><%= entry.date.strftime("%d/%m/%Y") %></td>
-        <td><%= entry.start_time.strftime("%H:%M") %> - <%= entry.finish_time.strftime("%H:%M") %></td>
-        <td><%= number_to_currency(entry.amount) %></td>
-      </tr>
-    <% end %>
-</table>
+<div class="body">
 
-<%= link_to "Create Timesheet Entry", new_entry_path %>
+  <h1>Timesheets Entries</h1>
+    
+  <table class="entry-table">
+      <tr>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Amount</th>
+      </tr>
+      <% @entries.each do |entry| %>
+        <tr>
+          <td><%= entry.date.strftime("%d/%m/%Y") %></td>
+          <td><%= entry.start_time.strftime("%H:%M") %> - <%= entry.finish_time.strftime("%H:%M") %></td>
+          <td><%= number_to_currency(entry.amount) %></td>
+        </tr>
+      <% end %>
+  </table>
+
+  <%= link_to "<button class='new-entry-button'>Create Timesheet Entry</button>".html_safe, new_entry_path %>
+
+</div>

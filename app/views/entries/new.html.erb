@@ -1,20 +1,27 @@
-<h1>Create Timesheet Entry</h1>
+<div class="body">
 
-<%= form_for @entry = Entry.new do |f| %>
-  <%= f.label 'Date' %>
-    <div>
-      <%= f.date_select :date,
-                        start_year: Date.current().year - 10, 
-                        end_year: Date.current().year 
-      %>
-    </div>
-  <%= f.label 'Start Time' %>
-    <div>
-      <%= f.time_select :start_time %>
-    </div>
-  <%= f.label 'Finish Time' %> 
-    <div>
-      <%= f.time_select :finish_time %>
-    </div>
-  <%= f.submit "Create"%>
-<% end %>
+  <h1>Create Timesheet Entry</h1>
+  
+  <div class="entry-form">
+    <%= form_for @entry = Entry.new do |f| %>
+      <%= f.label 'Date' %>
+        <div>
+          <%= f.date_select :date,
+                            start_year: Date.current().year - 10, 
+                            end_year: Date.current().year 
+          %>
+        </div>
+      <%= f.label 'Start Time' %>
+        <div>
+          <%= f.time_select :start_time %>
+        </div>
+      <%= f.label 'Finish Time' %> 
+        <div>
+          <%= f.time_select :finish_time %>
+        </div>
+      <%= f.submit "Create", class: "new-entry-button"%>
+    <% end %>
+  </div>
+  <%= link_to "<button class='new-entry-button'>Back to index</button>".html_safe, root_path %>
+
+</div>

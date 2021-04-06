@@ -13,3 +13,26 @@
  *= require_tree .
  *= require_self
  */
+
+.body {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.new-entry-button {
+    padding: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    color: #fff;
+    display: block;
+    margin: 0 auto;
+    background-color: green;
+    border: none;
+}
+
+.entry-form {
+    display: inline;
+}
